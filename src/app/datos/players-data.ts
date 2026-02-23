@@ -10,7 +10,7 @@ export const PLAYERS: Player[] = [
     posicion: 'Base',
     edad: 28,
     altura: 1.98,
-    video: 'url',
+    video: 'assets/videos/video1.mp4',
     imagen: 'assets/images/Eduard.jpg'
   },
   {
@@ -20,7 +20,7 @@ export const PLAYERS: Player[] = [
     posicion: 'Escolta',
     edad: 21,
     altura: 1.94,
-    video: 'url',
+    video: 'assets/videos/video2.mp4',
     imagen: 'assets/images/Andres.jpg'
   },
   {
@@ -30,7 +30,7 @@ export const PLAYERS: Player[] = [
     posicion: 'Escolta',
     edad: 19,
     altura: 2.00,
-    video: 'url',
+    video: 'assets/videos/video3.mp4',
     imagen: 'assets/images/Juan.jpg'
   },
   {
@@ -40,7 +40,7 @@ export const PLAYERS: Player[] = [
     posicion: 'Pivot',
     edad: 26,
     altura: 2.10,
-    video: 'url',
+    video: 'assets/videos/video4.mp4',
     imagen: 'assets/images/David.jpg'
   },
   {
@@ -50,7 +50,7 @@ export const PLAYERS: Player[] = [
     posicion: 'Pivot',
     edad: 27,
     altura: 2.16,
-    video: 'url',
+    video: 'assets/videos/video5.mp4',
     imagen: 'assets/images/Jose.jpg'
   }
 ];
