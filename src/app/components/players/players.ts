@@ -21,6 +21,7 @@ export class Players {
   playerSeleccionado?: Player; // Variable para guardar player seleccionado con el click
 
   textoFiltro: string = ''; // variable para guardar lo que el usuario escribe, viene de players.html que anteriormente lo ha recibido del output de search.ts
+  posicionFiltro: string = '';
 
   verDetail(player: Player) {  // Función para mostrar el detail del player guardado en la variable anterior
     if (this.playerSeleccionado === player) { // Si al hacer click el player es el mismo que está seleccionado, se anula la selección (se pone undefined) y como el player no está en la variable no se muestra el detail

@@ -6,11 +6,11 @@
   <div class="row">
     <div class="col-12 col-lg-7">
     <!-- Etiqueta del filtro -->
-    <app-search (busqueda)="textoFiltro = $event"></app-search> <!-- Aquí le decimos a angular que cuando se emite un evento con 'busqueda', coja el dato ($event) y lo guarde en la var textoFiltro (de players.ts) -->
+    <app-search (busqueda)="textoFiltro = $event" (posicion)="posicionFiltro = $event"></app-search> <!-- Aquí le decimos a angular que cuando se emite un evento con 'busqueda', coja el dato ($event) y lo guarde en la var textoFiltro (de players.ts). Lo mismo para posicion -->
 
       <div class="row g-4">
         <!-- usamos ngFor para iterar en la variable con la lista de jugadores importada de /players.ts y extrae un jugador cada vez en la variable 'player' para pintarlo con el html -->
-        <div class="col-12 col-md-6 col-lg-4" *ngFor="let player of listaPlayers | filter:textoFiltro"> <!-- Llamada a la pipe 'filter' para que pase la lista de jugadores según lo que haya en textoFiltro -->
+        <div class="col-12 col-md-6 col-lg-4" *ngFor="let player of listaPlayers | filter:textoFiltro:posicionFiltro"> <!-- Llamada a la pipe 'filter' para que pase la lista de jugadores según lo que haya en textoFiltro y posicionFiltro -->
           <div class="card h-100 shadow-sm border-0" (click)="verDetail(player)"> <!-- Capturamos el clik del user -->
             <img [src]="player.imagen" class="card-img-top object-fit-cover" alt="Foto de {{ player.nombre }}" style="height: 250px;">
             <div class="card-body d-flex flex-column text-center">

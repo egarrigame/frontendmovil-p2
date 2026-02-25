@@ -1,7 +1,23 @@
-<div class="mb-4">
-  <input type="text" 
-         class="form-control form-control-lg border-primary" 
-         placeholder="Busca por nombre, apellido o posición" 
-         (input)="textoBusqueda($event)"> <!-- llamada a la función de /search.ts, $event es una variable de Angular que envía la información de los cambios en el navegador -->
-         <!-- Funciona: cuando haya un cambio (input), llama y ejecuta la función (textoBusqueda) y pásale los datos ($event) -->
+<div class="row mb-4">
+
+  <!-- Filtro de búsqueda por nombre y apellido -->
+  <div class="col-md-8">
+    <input type="text" 
+      class="form-control form-control-lg border-primary" 
+      placeholder="Busca por nombre o apellido" 
+      (input)="textoBusqueda($event)"> <!-- llamada a la función de /search.ts, $event es una variable de Angular que envía la información de los cambios en el navegador -->
+      <!-- Funciona: cuando haya un cambio (input), llama y ejecuta la función (textoBusqueda) y pásale los datos ($event) -->
+  </div>
+
+  <!-- Dropdown posiciones -->
+  <div class="col-md-4 mt-3 mt-md-0">
+    <select class="form-select form-select-lg border-primary" (change)="posicionSeleccion($event)">
+      <option value="">Todas</option> 
+      <option value="Base">Base</option>
+      <option value="Escolta">Escolta</option>
+      <option value="Alero">Alero</option>
+      <option value="Pivot">Pivot</option>
+    </select>
+  </div>
+
 </div>

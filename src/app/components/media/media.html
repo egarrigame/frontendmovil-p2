@@ -1,11 +1,22 @@
 <div class="mt-4" *ngIf="videoUrl">
   <h6 class="text-secondary fw-bold mb-3">Multimedia</h6>
   
-  <div class="card bg-dark border-0 shadow-sm overflow-hidden rounded-3">
+  <div class="card align-items-center bg-dark border-0 shadow-sm overflow-hidden rounded-3">
 
     <!-- Elemento video con etiqueta para poder referenciar desde media.ts, @ViewChild busca 'reproductor' -->
-    <video #reproductor [src]="videoUrl" class="w-100" style="max-height: 250px; background: #000; object-fit: contain;"></video>
+    <video #reproductor [src]="videoUrl" class="w-100" style="max-height: 250px; background: #000; object-fit: contain;" (timeupdate)="barraAutomatica()"></video>
+    <!-- BARRA: el evento de timeupdate (nativo de html) se dispara cuando empieza la reproducción, llama a la función actualizarProgreso de /media.ts y calcula el procentaje.-->
     
+    <!-- Nueva parte de la barra de progreso -->
+    <div class="d-flex align-items-center mb-3">
+      <span class="text-light me-2 small"></span>
+      <input type="range" class="form-range" 
+        min="0" max="100" step="0.1" 
+        [value]="reproduccion"
+        (input)="barraUsuario($event)">
+        <!-- El html imprime la variable 'reproducción' de /media.ts donde tenemos nuestro porcentaje calculado, después permite que el usuario pueda mover la barra (input) y así recalculamos el nuevo porcentaje y se imprime -->
+    </div>
+
     <div class="card-footer d-flex justify-content-center gap-3 bg-dark border-0 pb-3">
       <button class="btn btn-outline-light rounded-circle" (click)="play()" title="Reproducir"> <!-- Llamad a los eventos creados de control del video, cuando el usuario hace click, llama a la función en media.ts -->
         <i class="bi bi-play-fill fs-5"></i>
@@ -13,6 +24,19 @@
       <button class="btn btn-outline-light rounded-circle" (click)="pause()" title="Pausar">
         <i class="bi bi-pause-fill fs-5"></i>
       </button>
+      <button class="btn btn-outline-light rounded-circle" (click)="stop()" title="Detener">
+        <i class="bi bi-stop-fill fs-5"></i>
+      </button>
     </div>
+
+    <!-- Nueva parte para el control de volumen -->
+    <div class="d-flex align-items-center" style="width: 120px;">
+      <span class="text-light me-2"><i class="bi bi-volume-up-fill"></i></span>
+      <input type="range" class="form-range" 
+        min="0" max="100" step="0.1" 
+        [value]="volumen" 
+        (input)="volumenUsuario($event)">
+        <!-- Mismo propceder que con la barra de progreso -->
+    </div>  
   </div>
 </div>
