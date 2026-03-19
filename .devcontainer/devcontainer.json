@@ -1,0 +1,4 @@
+{
+  "name": "equipo-basket",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:22"
+}
