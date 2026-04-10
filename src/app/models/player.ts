@@ -1,7 +1,7 @@
 // modelo de datos del componente player
 
 export interface Player {
-  id: number;
+  id: string;
   nombre: string;
   apellidos: string;
   posicion: string;

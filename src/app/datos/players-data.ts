@@ -4,7 +4,7 @@ import { Player } from '../models/player'; // importamos el modelo
 
 export const PLAYERS: Player[] = [ 
   {
-    id: 1,
+    id: '1',
     nombre: 'Eduard',
     apellidos: 'Garriga',
     posicion: 'Base',
@@ -14,7 +14,7 @@ export const PLAYERS: Player[] = [
     imagen: 'assets/images/Eduard.jpg'
   },
   {
-    id: 1,
+    id: '1',
     nombre: 'Andres',
     apellidos: 'Restrepo',
     posicion: 'Escolta',
@@ -24,7 +24,7 @@ export const PLAYERS: Player[] = [
     imagen: 'assets/images/Andres.jpg'
   },
   {
-    id: 1,
+    id: '1',
     nombre: 'Juan',
     apellidos: 'Roig',
     posicion: 'Escolta',
@@ -34,7 +34,7 @@ export const PLAYERS: Player[] = [
     imagen: 'assets/images/Juan.jpg'
   },
   {
-    id: 1,
+    id: '1',
     nombre: 'David',
     apellidos: 'Casero',
     posicion: 'Pivot',
@@ -44,7 +44,7 @@ export const PLAYERS: Player[] = [
     imagen: 'assets/images/David.jpg'
   },
   {
-    id: 1,
+    id: '1',
     nombre: 'Jose',
     apellidos: 'Ramirez',
     posicion: 'Pivot',

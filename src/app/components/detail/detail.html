@@ -8,22 +8,73 @@
   <img [src]="player.imagen" 
        class="card-img-top object-fit-cover" 
        alt="Foto de {{ player.nombre }}" 
-       style="height: 200px;"> <div class="card-body">
-    <h3 class="card-title text-primary fw-bold">{{ player.nombre }} {{ player.apellidos }}</h3>
-    <h5 class="text-secondary mb-3">{{ player.posicion }}</h5>
+       style="height: 200px;"> 
+       
+  <div class="card-body">
     
-    <hr>
-    
-    <div class="row text-center my-4">
-      <div class="col-6 border-end"> <h6 class="text-muted mb-1"><i class="bi bi-calendar-event"></i> Edad</h6>
-        <p class="fs-4 fw-bold mb-0">{{ player.edad }} años</p>
+    <ng-container *ngIf="!modoEdicion">
+      <h3 class="card-title text-primary fw-bold">{{ player.nombre }} {{ player.apellidos }}</h3>
+      <h5 class="text-secondary mb-3">{{ player.posicion }}</h5>
+      
+      <hr>
+      
+      <div class="row text-center my-4">
+        <div class="col-6 border-end"> 
+          <h6 class="text-muted mb-1"><i class="bi bi-calendar-event"></i> Edad</h6>
+          <p class="fs-4 fw-bold mb-0">{{ player.edad }} años</p>
+        </div>
+        <div class="col-6">
+          <h6 class="text-muted mb-1"><i class="bi bi-arrows-vertical"></i> Altura</h6>
+          <p class="fs-4 fw-bold mb-0">{{ player.altura }} m</p>
+        </div>
       </div>
-      <div class="col-6">
-        <h6 class="text-muted mb-1"><i class="bi bi-arrows-vertical"></i> Altura</h6>
-        <p class="fs-4 fw-bold mb-0">{{ player.altura }} m</p>
+
+      <button class="btn btn-outline-primary w-100 mb-3" (click)="activarEdicion()">
+        <i class="bi bi-pencil-square"></i> Editar Datos
+      </button>
+    </ng-container>
+
+    <ng-container *ngIf="modoEdicion">
+      <div class="alert alert-info py-2 small">Modo edición activado</div>
+      
+      <div class="mb-2">
+        <label class="form-label text-muted small mb-0">Nombre</label>
+        <input type="text" class="form-control" [(ngModel)]="playerEditado.nombre">
       </div>
-    </div>
-    
+      
+      <div class="mb-2">
+        <label class="form-label text-muted small mb-0">Apellidos</label>
+        <input type="text" class="form-control" [(ngModel)]="playerEditado.apellidos">
+      </div>
+
+      <div class="mb-2">
+        <label class="form-label text-muted small mb-0">Posición</label>
+        <select class="form-select" [(ngModel)]="playerEditado.posicion">
+          <option value="Base">Base</option>
+          <option value="Escolta">Escolta</option>
+          <option value="Alero">Alero</option>
+          <option value="Ala-Pivot">Ala-Pivot</option>
+          <option value="Pivot">Pivot</option>
+        </select>
+      </div>
+      
+      <div class="row my-3">
+        <div class="col-6">
+          <label class="form-label text-muted small mb-0">Edad</label>
+          <input type="number" class="form-control" [(ngModel)]="playerEditado.edad">
+        </div>
+        <div class="col-6">
+          <label class="form-label text-muted small mb-0">Altura (m)</label>
+          <input type="number" class="form-control" step="0.01" [(ngModel)]="playerEditado.altura">
+        </div>
+      </div>
+
+      <div class="d-flex gap-2 mb-3">
+        <button class="btn btn-success w-50" (click)="guardarEdicion()">Guardar</button>
+        <button class="btn btn-secondary w-50" (click)="cancelarEdicion()">Cancelar</button>
+      </div>
+    </ng-container>
+
     <app-media [videoUrl]="player.video"></app-media>
 
   </div>
