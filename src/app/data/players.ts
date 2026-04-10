@@ -73,3 +73,4 @@ export const PLAYERS: Player[] = [
     photoUrl: 'https://images.pexels.com/photos/974501/pexels-photo-974501.jpeg?auto=compress&cs=tinysrgb&w=400'
   }
 ];
+

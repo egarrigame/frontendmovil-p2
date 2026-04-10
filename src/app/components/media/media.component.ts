@@ -76,3 +76,4 @@ export class MediaComponent implements OnChanges {
     return null;
   }
 }
+

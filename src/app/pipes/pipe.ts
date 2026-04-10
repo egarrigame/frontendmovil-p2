@@ -30,3 +30,4 @@ export class PlayerFilterPipe implements PipeTransform {
     return filtered;
   }
 }
+
