@@ -43,6 +43,9 @@
         <div class="card shadow border-success mb-4" *ngIf="mostrarFormularioAlta">
           <div class="card-header bg-success text-white fw-bold">Nuevo jugador</div>
           <div class="card-body">
+            <div class="alert alert-danger py-2 small" *ngIf="mensajeError">
+              <i class="bi bi-exclamation-triangle-fill"></i> {{ mensajeError }}
+            </div>
             <div class="mb-2">
               <label class="form-label small mb-0">Nombre</label>
               <input type="text" class="form-control" [(ngModel)]="nuevoPlayer.nombre">
@@ -71,7 +74,33 @@
                 <input type="number" class="form-control" step="0.01" [(ngModel)]="nuevoPlayer.altura">
               </div>
             </div>
-            <button class="btn btn-success w-100 mb-2" (click)="guardarNuevoJugador()">Crear jugador</button>
+            <div class="mb-3">
+              <label class="form-label small mb-0">Imagen</label>
+              <div class="input-group">
+                <span class="input-group-text small">Nombre archivo</span>
+                <input type="text" 
+                      class="form-control" 
+                      [(ngModel)]="nuevoPlayer.imagen" 
+                      placeholder="nombre.jpg">
+              </div>
+              <div class="form-text extra-small">
+                El archivo tiene que existir en /assets/images
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label small mb-0">Video</label>
+              <div class="input-group">
+                <span class="input-group-text small bg-light">Nombre archivo</span>
+                <input type="text" 
+                      class="form-control" 
+                      [(ngModel)]="nuevoPlayer.video" 
+                      placeholder="jugada.mp4">
+              </div>
+              <div class="form-text extra-small">
+                El archivo tiene que existir en /assets/videos
+              </div>
+            </div>
+            <button class="btn btn-success w-100 mb-2" (click)="guardarNuevoJugador()" [disabled]="!nuevoPlayer.nombre || !nuevoPlayer.apellidos">Crear jugador</button>
             <button class="btn btn-light w-100" (click)="mostrarFormularioAlta = false">Cancelar</button>
           </div>
         </div>
@@ -81,6 +110,9 @@
           Selecciona un jugador o pulsa "Nuevo jugador"
         </div>
         <app-detail [player]="playerSeleccionado" (cerrarDetail)="playerSeleccionado = undefined"></app-detail>   <!-- Etiqueta del detail para mostrar el detalle del jugador cuando se seleccione y poder cerrarlo -->
+      </div>
+      <div class="alert alert-success mt-2 py-2 shadow-sm" *ngIf="mensajeExito">
+        <i class="bi bi-check-circle-fill"></i> {{ mensajeExito }}
       </div>
     </div>
   </div>

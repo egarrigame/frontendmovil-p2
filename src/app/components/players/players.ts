@@ -24,6 +24,9 @@ export class Players implements OnInit { // OnInit carga los datos de firebase a
   textoFiltro: string = ''; // variable para guardar lo que el usuario escribe, viene de players.html que anteriormente lo ha recibido del output de search.ts
   posicionFiltro: string = '';
 
+  mensajeExito: string = ''; // mensajes éxito o error
+  mensajeError: string = '';
+
   mostrarFormularioAlta: boolean = false; // variables para crear jugador
   nuevoPlayer: Partial<Player> = {
     nombre: '',
@@ -31,8 +34,8 @@ export class Players implements OnInit { // OnInit carga los datos de firebase a
     posicion: 'Base',
     edad: 18,
     altura: 1.80,
-    video: 'assets/videos/Jose.mp4', // Default, luego haré que se puedan subir xxxxxxxxxxxxxxxxxxx remember
-    imagen: 'assets/images/Jose.jpg'
+    video: 'assets/videos/',
+    imagen: 'assets/images/' // rutas preparadas para al crear un nuevo player que apunte a la carpeta
   };
 
   private firestore: Firestore = inject(Firestore); // Conexión con Firestore, la que está configurada en /app.config.ts
@@ -76,19 +79,41 @@ export class Players implements OnInit { // OnInit carga los datos de firebase a
   }
 
   async guardarNuevoJugador() {
+    if (!this.nuevoPlayer.nombre || !this.nuevoPlayer.apellidos) { // check campos obligatorios
+      this.mensajeError = 'Nombre y apellidos obligatorio';
+      this.cdr.detectChanges();
+      return;
+    }
+    
     try {
+      if (this.nuevoPlayer.imagen === 'assets/images/') { 
+        this.nuevoPlayer.imagen = 'assets/images/Jose.jpg'; // si no ha escrito nombre de imagen, ponemos una default
+      }
+
+      if (this.nuevoPlayer.video === 'assets/videos/') {
+        this.nuevoPlayer.video = 'assets/videos/Jose.mp4'; // Mismo para video
+      }
+      
       const playersRef = collection(this.firestore, 'players');
       
       await addDoc(playersRef, this.nuevoPlayer); // enviamos el objeto a firebase, id automático
-      
-      console.log('Jugador guardado');
+
+      this.mensajeExito = 'Jugador registrado'; // mensaje de e´xito y borramos si hubiera de error
+      this.mensajeError = '';
     
       this.mostrarFormularioAlta = false;
-      this.nuevoPlayer = { nombre: '', apellidos: '', posicion: 'Base', edad: 18, altura: 1.80, video: 'assets/videos/video1.mp4', imagen: 'assets/images/default.jpg' };
+      this.nuevoPlayer = { nombre: '', apellidos: '', posicion: 'Base', edad: 18, altura: 1.80, video: 'assets/videos/', imagen: 'assets/images/' };
+
+      setTimeout(() => { // borramos mensaje en 3 segundos
+        this.mensajeExito = '';
+        this.cdr.detectChanges();
+      }, 3000);
+
       this.cdr.detectChanges();
 
     } catch (error) {
-      console.error('Error al crear jugador:', error);
+      this.mensajeError = 'Error al crear el jugador'; // mensaje de error
+      console.error('Error al crear jugador', error);
     }
   }
 
